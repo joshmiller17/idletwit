@@ -10,6 +10,7 @@ public class TwitPost : MonoBehaviour
     private bool isGraffitied = false;
     private bool isEggplanted = false;
     public GameObject Nest;
+    public GameObject SMBox;
     public GameObject EchoButton;
     public GameObject GraffitiButton;
     public GameObject EggplantButton;
@@ -50,26 +51,39 @@ public class TwitPost : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (transform.position.y < -2000) //don't delete until a while off screen
+        if (transform.position.y < -1000) //don't delete until a while off screen
         {
             Destroy(gameObject);
         }
 
-        if (popularity > 0 /*shortcut for SM, maybe fix*/ && Random.Range(0, 10) < 1)
+        if ((popularity > 0 || author == "You")/*shortcut for SM, maybe fix*/ && Random.Range(0, 10) < 1)
         {
+            if (author == "You")
+            {
+                popularity += (Nest.GetComponent<Nest>().twitIntensity * NB.peeps) / 100000000;
+            }
+            popularity = Mathf.Min(0.001f, popularity);
             //PlayQuietPop();
-            int NewGraffitis = Mathf.RoundToInt(popularity * 100 * Random.Range(0, 20));
-            int NewEchoes = Mathf.RoundToInt(popularity * 100 * Random.Range(0, 40));
-            int NewEggplants = Mathf.RoundToInt(popularity * 100 * Random.Range(0, 100));
+            int NewGraffitis = Mathf.RoundToInt(Mathf.Max(0,popularity) * Random.Range(0, NB.peeps));
+            int NewEchoes = Mathf.RoundToInt(Mathf.Max(0, popularity) * Random.Range(0, NB.peeps));
+            int NewEggplants = Mathf.RoundToInt(Mathf.Max(0, popularity) * Random.Range(0, NB.peeps * 10));
             Echoes += NewEchoes;
             Graffitis += NewGraffitis;
             Eggplants += NewEggplants;
             if (author == "You")
             {
+                popularity += NB.peeps / 1000000f;
                 NB.AddEggplants(Mathf.RoundToInt((NewEggplants * NB.peeps) / 1000000f));
                 if (Random.Range(0f, 1f) < Mathf.Min(0.5f, popularity * 100 + 0.00002f + NB.peeps * .00000001f))
                 {
-                    NB.AddPeep(Nest.GetComponent<Nest>().GenerateUsername());
+                    if (NB.eggplants > 100 * NB.peeps)
+                    {
+                        NB.AddPeep(Nest.GetComponent<Nest>().GenerateUsername());
+                    }
+                    else
+                    {
+                        NB.AddEggplants(1);
+                    }
                 }
             }
             UpdateStats();
@@ -103,7 +117,6 @@ public class TwitPost : MonoBehaviour
             }
             else
             {
-                EggplantStat.GetComponent<Text>().text = LotsaEggplants[Random.Range(0, LotsaEggplants.Length)];
             }
         }
     }
@@ -163,10 +176,14 @@ public class TwitPost : MonoBehaviour
             if (author == "You")
             {
                 Nest.GetComponent<Nest>().LosePeeps();
+                SMBox.GetComponent<Nest>().PostTwit(Nest.GetComponent<Nest>().GenerateUsername(), "Echoing your own twit? Laaame!");
             }
-            else if (Random.Range(0f,1f) < Mathf.Min(0.5f, + 0.0002f + popularity * 10 * NB.peeps * .0000001f))
+            else if (Random.Range(0f, 1f) < Mathf.Min(0.5f, +0.0002f + popularity * 10 * NB.peeps * .0000001f))
             {
-                NB.AddPeep(author);
+                if (NB.eggplants > 100 * NB.peeps)
+                {
+                    NB.AddPeep(author);
+                }
             }
         }
         else
@@ -188,6 +205,7 @@ public class TwitPost : MonoBehaviour
             if (author == "You")
             {
                 Nest.GetComponent<Nest>().LosePeeps();
+                SMBox.GetComponent<Nest>().PostTwit(Nest.GetComponent<Nest>().GenerateUsername(), "Graffiti on your own twit? You must be so lonely!");
             }
             else if (Graffitis == 1)
             {
@@ -200,8 +218,11 @@ public class TwitPost : MonoBehaviour
                 }
             }
             else if (Random.Range(0f, 1f) < Mathf.Min(0.5f, + 0.0002f + popularity * 10 * NB.peeps * .0000001f))
-            {   
-                NB.AddPeep(author);
+            {
+                if (NB.eggplants > 100 * NB.peeps)
+                {
+                    NB.AddPeep(author);
+                }
             }
         }
         else
@@ -222,7 +243,10 @@ public class TwitPost : MonoBehaviour
 
             if (Random.Range(0f, 1f) < Mathf.Min(0.5f, + 0.000002f + popularity * NB.peeps * .000000001f))
             {
-                NB.AddPeep(author);
+                if (NB.eggplants > 100 * NB.peeps)
+                {
+                    NB.AddPeep(author);
+                }
             }
         }
         else
@@ -242,9 +266,4 @@ public class TwitPost : MonoBehaviour
         }
     }
 
-    void OnBecameInvisible()
-    {
-        Debug.Log("Destroy");
-        Destroy(gameObject);
-    }
 }

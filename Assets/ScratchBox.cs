@@ -16,11 +16,10 @@ public class ScratchBox : MonoBehaviour
 
     private string nextTwit = "";
 
-    private string[] testTwits = { "Blah blah", "test only", "what a twit", "this twit is really long and is only a test just a test to test testing" };
-    private List<float> tutorialTimers = new List<float> {  3, 2,   1, 2, 3,   2, 3, 6,
+    private List<float> tutorialTimers = new List<float> {  5, 4,   1, 2, 3,   2, 3, 6,
                                                             2,5,3,   .8f,.7f,.9f,  8,3,10,    8, 3, 4,
                                                             3.6f, 4.2f, 5,  3 };
-    private float timeToNextTutorial = 0;
+    private float timeToNextTutorial = 4;
     private List<string> tutorialTwits = new List<string>
     {
         "Welcome to Twit Idol!", //no timer
@@ -64,14 +63,13 @@ public class ScratchBox : MonoBehaviour
     void Start()
     {
         GenerateNewTwit();
-
+        Nest.GetComponent<Nest>().PostTwit("You", "Just joined Twit Idol! #twit #idol #beginner");
     }
 
 
-    //TODO
     void GenerateNewTwit()
     {
-        nextTwit = testTwits[Random.Range(0, 4)];
+        nextTwit = Nest.GetComponent<Nest>().WriteTwit();
     }
 
     public void ClearTwit()
@@ -113,7 +111,7 @@ public class ScratchBox : MonoBehaviour
 
     void SendTwit()
     {
-        Nest.GetComponent<Nest>().PostTwit("You", RealText.GetComponent<Text>().text);
+        Nest.GetComponent<Nest>().PostTwit("You", RealText.GetComponent<Text>().text, -1);
         ClearTwit();
         Nest.GetComponent<Nest>().twitIntensity -= 0.15f;
         Nest.GetComponent<Nest>().timeSinceLastTwit = 0f;

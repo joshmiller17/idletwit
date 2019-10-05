@@ -2,32 +2,49 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityTracery;
 
 public class Nest : MonoBehaviour
 {
     public GameObject TwitPostPrefab;
     public GameObject NB;
+    public GameObject SMBox;
+    public TextAsset UsernameGrammarFile;
+    public TextAsset TwitGrammarFile;
+    public TraceryGrammar UsernameGrammar;
+    public TraceryGrammar TwitGrammar;
     public bool isSM = false;
     private List<GameObject> Twits = new List<GameObject>();
     private float timeTilNextUserPost = 0;
     public AudioSource clack;
     public AudioClip[] clackClips;
     public float twitIntensity = 5f; //less is more
-    public  float timeSinceLastTwit = 0f;
+    public float timeSinceLastTwit = 0f;
+    private float initialDelay = 0f; //75f; TODO put back after testing
 
     // Start is called before the first frame update
     void Start()
     {
-
+        UsernameGrammar = new TraceryGrammar(UsernameGrammarFile.text);
+        TwitGrammar = new TraceryGrammar(TwitGrammarFile.text);
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (initialDelay > 0)
+        {
+            initialDelay -= Time.deltaTime;
+            return;
+        }
         timeSinceLastTwit += Time.deltaTime;
         if (timeSinceLastTwit > Random.Range(0f, Mathf.Max(1, 10000000 - NB.GetComponent<NumbersBoard>().peeps)))
         {
             LosePeeps();
+            if (isSM && NB.GetComponent<NumbersBoard>().peeps > 3)
+            {
+                PostTwit(GenerateUsername(), TwitGrammar.Parse("#notwit#"));
+            }
         }
 
         if (!isSM && timeTilNextUserPost < 0)
@@ -52,7 +69,10 @@ public class Nest : MonoBehaviour
 
     public void LosePeeps()
     {
-        NB.GetComponent<NumbersBoard>().RemovePeep();
+        for (int i = 0; i < Random.Range(0, NB.GetComponent<NumbersBoard>().peeps / 8); i++)
+        {
+            NB.GetComponent<NumbersBoard>().RemovePeep();
+        }
         if (0.5 > Random.Range(0f, Mathf.Max(1, 10000000 - NB.GetComponent<NumbersBoard>().peeps)))
         {
             LosePeeps();
@@ -67,22 +87,44 @@ public class Nest : MonoBehaviour
 
     void GenerateUserPost()
     {
-        float success = Random.Range(-1.0f, 10.0f) * (NB.GetComponent<NumbersBoard>().peeps + 1);
-        success = Mathf.Max(Mathf.Pow(success, Random.Range(0f, 4f)), 0);
+        float success = Random.Range(-1.0f, 2.0f) * (NB.GetComponent<NumbersBoard>().peeps + 1);
+        success = Mathf.Max(Mathf.Pow(success, Random.Range(0f, 3f)), 0);
 
         PostTwit(GenerateUsername(), GenerateTwit(), success / 1000000f);
     }
 
-    //TODO Tracery
     public string GenerateUsername()
     {
-        return "User" + Random.Range(0, 10000).ToString();
+        if (UsernameGrammar == null)
+        {
+            UsernameGrammar = new TraceryGrammar(UsernameGrammarFile.text);
+        }
+        if (Random.Range(0, 1f) < 0.7f)
+        {
+            return UsernameGrammar.Generate();
+        }
+        else if (Random.Range(0, 1f) < 0.3f)
+        {
+            return UsernameGrammar.Generate() + Random.Range(0, 10000).ToString();
+        }
+        else
+        {
+            return UsernameGrammar.Generate() + Random.Range(0, 100).ToString();
+        }
     }
 
-    //TODO Tracery
     string GenerateTwit()
     {
-        return "blah, my favorite number is " + Random.Range(0, 10000).ToString();
+        if (TwitGrammar == null)
+        {
+            TwitGrammar = new TraceryGrammar(TwitGrammarFile.text);
+        }
+        return TwitGrammar.Generate();
+    }
+
+    public string WriteTwit()
+    {
+        return TwitGrammar.Parse("#twit#");
     }
 
     private string AuthorToUsername(string author)
@@ -100,6 +142,7 @@ public class Nest : MonoBehaviour
     {
         GameObject NewPost = Instantiate(TwitPostPrefab, transform.position + new Vector3(0, 170, 0), Quaternion.identity);
         NewPost.GetComponent<TwitPost>().Nest = this.gameObject;
+        NewPost.GetComponent<TwitPost>().SMBox = SMBox;
         NewPost.GetComponent<TwitPost>().NB = NB.GetComponent<NumbersBoard>();
         NewPost.GetComponent<TwitPost>().popularity = popularity;
         NewPost.transform.SetParent(gameObject.transform);
@@ -146,6 +189,10 @@ public class Nest : MonoBehaviour
     public GameObject PostTwit(string author, string content, float popularity = 0)
     {
         //if I had more time, this should get moved to TwitPost
+        if (popularity == -1)
+        {
+            return PostTwit(author, content, popularity, 0, 0, 0);
+        }
         float success = popularity * 1000000;
         float variance = success / 10f + Random.Range(0f, 2f);
         int Echoes = Mathf.RoundToInt(Mathf.Max(0, Mathf.Floor(success + variance * Random.Range(-5f, 3f))));

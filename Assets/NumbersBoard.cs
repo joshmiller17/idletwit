@@ -8,8 +8,10 @@ public class NumbersBoard : MonoBehaviour
 
     public GameObject PeepCount;
     public GameObject EggplantCount;
+    public GameObject DeleteButton;
     public int peeps;
     public long eggplants;
+    public int maxPeepsEver = 0;
     private HashSet<string> Peepers = new HashSet<string>();
 
     // Start is called before the first frame update
@@ -21,7 +23,10 @@ public class NumbersBoard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        
+        if (maxPeepsEver > 100 && peeps < maxPeepsEver / 2)
+        {
+            DeleteButton.SetActive(true);
+        }
     }
 
     public void RemovePeep()
@@ -38,7 +43,7 @@ public class NumbersBoard : MonoBehaviour
 
     public bool AddPeep(string peep)
     {
-        if (Peepers.Contains(peep))
+        if (Peepers.Contains(peep) || eggplants < 100 * peeps)
         {
             return false;
         }
@@ -46,6 +51,10 @@ public class NumbersBoard : MonoBehaviour
         {
             Peepers.Add(peep);
             peeps += 1;
+            if (peeps > maxPeepsEver)
+            {
+                maxPeepsEver = peeps;
+            }
             PeepCount.GetComponent<Text>().text = peeps.ToString();
             return true;
         }
@@ -53,6 +62,7 @@ public class NumbersBoard : MonoBehaviour
 
     public void AddEggplants(int Eggplants)
     {
+       
         eggplants += Eggplants;
         if (eggplants < 1000000)
         {
