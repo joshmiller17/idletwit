@@ -1,2 +1,2 @@
-# idletwit
-Idle Twit, a game for Ludum Dare 45.
+# Idle Twit
+A game for Ludum Dare 45: "Start with nothing."
