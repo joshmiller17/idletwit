@@ -9,6 +9,7 @@ public class NumbersBoard : MonoBehaviour
     public GameObject PeepCount;
     public GameObject EggplantCount;
     public GameObject DeleteButton;
+    public GameObject bgm;
     public int peeps;
     public long eggplants;
     public int maxPeepsEver = 0;
@@ -31,6 +32,7 @@ public class NumbersBoard : MonoBehaviour
 
     public void RemovePeep()
     {
+        bgm.GetComponent<BGM>().doingGood = false;
         if (peeps < 3)
         {
             return;
@@ -43,6 +45,7 @@ public class NumbersBoard : MonoBehaviour
 
     public bool AddPeep(string peep)
     {
+        bgm.GetComponent<BGM>().doingGood = true;
         if (Peepers.Contains(peep) || eggplants < 100 * peeps)
         {
             return false;

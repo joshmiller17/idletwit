@@ -56,7 +56,7 @@ public class TwitPost : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if ((popularity > 0 || author == "You")/*shortcut for SM, maybe fix*/ && Random.Range(0, 10) < 1)
+        if ((popularity > 0 || author == "You" || (Random.Range(0, 10) < 1 && Echoes + Graffitis + Eggplants > 0)) && Random.Range(0, 5) < 1)
         {
             if (author == "You")
             {
@@ -67,6 +67,10 @@ public class TwitPost : MonoBehaviour
             int NewGraffitis = Mathf.RoundToInt(Mathf.Max(0,popularity) * Random.Range(0, NB.peeps));
             int NewEchoes = Mathf.RoundToInt(Mathf.Max(0, popularity) * Random.Range(0, NB.peeps));
             int NewEggplants = Mathf.RoundToInt(Mathf.Max(0, popularity) * Random.Range(0, NB.peeps * 10));
+            if (Random.Range(0, 10) > 8)
+            {
+                NewEggplants += 1;
+            }
             Echoes += NewEchoes;
             Graffitis += NewGraffitis;
             Eggplants += NewEggplants;
