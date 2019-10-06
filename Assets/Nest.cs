@@ -23,7 +23,8 @@ public class Nest : MonoBehaviour
     public AudioClip[] clackClips;
     public float twitIntensity = 5f; //less is more
     public float timeSinceLastTwit = 0f;
-    private float initialDelay = 60f;
+    private float initialDelay = 54f;
+    private bool tested = false;
 
     // Start is called before the first frame update
     void Start()
@@ -43,15 +44,18 @@ public class Nest : MonoBehaviour
         if (initialDelay > 0)
         {
             initialDelay -= Time.deltaTime;
-            if (initialDelay <= 0 && !isSM)
+            if (initialDelay <= 0 && !isSM && !tested)
             {
                 ScratchBox.GetComponent<InputField>().interactable = true;
                 Placeholder.SetActive(true);
+                PostTwit("You", "Just joined Twit Idol! #twit #idol #beginner", -1, 0, 0, 0);
+                initialDelay = 25f;
+                tested = true;
             }
             return;
         }
         timeSinceLastTwit += Time.deltaTime;
-        if (!isSM && timeSinceLastTwit > Random.Range(0f, Mathf.Max(1, 1000000 - 3 * NB.GetComponent<NumbersBoard>().peeps)))
+        if (isSM && timeSinceLastTwit > Random.Range(0f, Mathf.Max(1, 1000000 - 3 * NB.GetComponent<NumbersBoard>().peeps)))
         {
             LosePeeps();
             if (isSM && NB.GetComponent<NumbersBoard>().peeps > 3 && !isTutorialGoing() && Random.Range(0f, 1f) < 0.3f)
@@ -59,7 +63,7 @@ public class Nest : MonoBehaviour
                 PostTwit(GenerateUsername(), TwitGrammar.Parse("#notwit#"));
                 LosePeeps();
             }
-            else
+            else if (isSM && timeSinceLastTwit > 30 && NB.GetComponent<NumbersBoard>().peeps > 5)
             {
                 string twit = "Sheesh, you haven't posted in " + timeSinceLastTwit.ToString("F1") + " seconds, what's the deal?";
                 PostTwit(GenerateUsername(), twit);

@@ -59,14 +59,15 @@ public class TwitPost : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        //slow things down
-        if (Random.Range(0f,1f) > 0.001)
-        {
-            return;
-        }
-        if (transform.position.y < -1000) //don't delete until a while off screen
+        if (transform.position.y < 50)
         {
             Destroy(gameObject);
+        }
+
+        //slow things down
+        if (Random.Range(0f,1f) > 0.005)
+        {
+            return;
         }
 
         if ((popularity > 0 || author == "You" || (Random.Range(0, 10) < 1 && Echoes + Graffitis + Eggplants > 0)) && Random.Range(0, 5) < 1)
@@ -92,7 +93,7 @@ public class TwitPost : MonoBehaviour
                 popularity += NB.peeps / 100000f;
                 if (NewEggplants > 10)
                 {
-                    NewEggplants = Mathf.RoundToInt(NewEggplants / NB.peeps);
+                    NewEggplants = Mathf.RoundToInt(NewEggplants / NB.peeps) + 1;
                 }
                 NB.AddEggplants(NewEggplants);
                 if (NewEggplants > 0)
@@ -252,7 +253,7 @@ public class TwitPost : MonoBehaviour
                 }
                 else if (response == 1)
                 {
-                    SMBox.GetComponent<Nest>().PostTwit(Nest.GetComponent<Nest>().GenerateUsername(), "Hold up on the Graffiti dude.");
+                    SMBox.GetComponent<Nest>().PostTwit(Nest.GetComponent<Nest>().GenerateUsername(), "Hold up on the Graffiti, dude.");
                 }
                 else if (response == 2)
                 {

@@ -16,9 +16,9 @@ public class ScratchBox : MonoBehaviour
 
     private string nextTwit = "";
 
-    private List<float> tutorialTimers = new List<float> {  3, 2.5f,   1, 2, 3,   2, 3, 6,
-                                                            2,5,3,   .8f,.7f,.9f,  6,2.5f,5,    4, 3, 4,
-                                                            3.6f, 4.2f, 4,  3, 1.5f };
+    private List<float> tutorialTimers = new List<float> {  3, 2.5f,   1, 2, 3,   2, 3, 4,
+                                                            2,4,3,   .8f,.7f,.9f,  6,2.5f,5,    3f, 2, 2.3f,
+                                                            3.1f, 2.2f, 2.8f,  2, 2, 1.5f };
     private float timeToNextTutorial = 1; //timer for first tutorial post
     public List<string> tutorialTwits = new List<string>
     {
@@ -54,8 +54,9 @@ public class ScratchBox : MonoBehaviour
 
         "Feel like a Twit isn't enough about you? Click that Graffiti button to fix that!",
         "Eventually, you'll start to earn some Peeps who care about you!",
-        "Follow the Peeps, interact with famous Twits! Popular Twits are popular for a reason ;)",
-
+        "Follow the Peeps, interact with famous Twits!",
+        
+        "Popular Twits are popular for a reason ;)",
         "Reach MAXIMUM PEEPAGE to become a true TWIT IDOL!",
         "Now get twitposting!!1!"
     };
@@ -64,7 +65,6 @@ public class ScratchBox : MonoBehaviour
     void Start()
     {
         GenerateNewTwit();
-        Nest.GetComponent<Nest>().PostTwit("You", "Just joined Twit Idol! #twit #idol #beginner", -1,0,0,0);
     }
 
 
@@ -112,6 +112,7 @@ public class ScratchBox : MonoBehaviour
         Nest.GetComponent<Nest>().PostTwit("You", RealText.GetComponent<Text>().text, -1);
         ClearTwit();
         Nest.GetComponent<Nest>().twitIntensity -= 0.15f;
+        SMBox.GetComponent<Nest>().timeSinceLastTwit = 0f;
         Nest.GetComponent<Nest>().timeSinceLastTwit = 0f;
     }
 

@@ -11,10 +11,10 @@ public class Cloud : MonoBehaviour
     void Start()
     {
         GetComponent<Image>().sprite = sprites[Random.Range(0, sprites.Length)];
-        float scale = Random.Range(0.5f, 4f);
+        float scale = Random.Range(0.5f, 5f);
         if (scale > 1.6f)
         {
-            transform.SetAsFirstSibling();
+            transform.SetSiblingIndex(1);
         }
         else
         {

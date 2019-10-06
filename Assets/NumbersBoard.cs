@@ -32,9 +32,9 @@ public class NumbersBoard : MonoBehaviour
         }
 
         // Cloud spawner
-        if (Random.Range(0f, 100f) < 0.03)
+        if (Random.Range(0f, 100f) < .006)
         {
-            GameObject spawn = Instantiate(Cloud, new Vector3(-1000, Random.Range(-1000, 1000), 0), Quaternion.identity);
+            GameObject spawn = Instantiate(Cloud, new Vector3(-1000, Random.Range(-500, 1000), 0), Quaternion.identity);
             spawn.transform.SetParent(gameObject.transform.parent);
         }
     }
@@ -54,11 +54,10 @@ public class NumbersBoard : MonoBehaviour
 
     public bool AddPeep(string peep)
     {
-        GameObject spawn = Instantiate(PeepCloud, new Vector3(-1000, Random.Range(-1000, 1000), 0), Quaternion.identity);
-        spawn.transform.SetParent(gameObject.transform.parent);
-        if (Random.Range(0f, 1f) > 0.9f)
+        for (int i = 0; i < 3; i++)
         {
-            bgm.GetComponent<BGM>().doingGood = true;
+            GameObject spawn = Instantiate(PeepCloud, new Vector3(-1000, Random.Range(-500, 1000), 0), Quaternion.identity);
+            spawn.transform.SetParent(gameObject.transform.parent);
         }
         if (Peepers.Contains(peep) || eggplants < 100 * peeps)
         {
@@ -66,6 +65,10 @@ public class NumbersBoard : MonoBehaviour
         }
         else
         {
+            if (Random.Range(0f, 1f) > 0.995f)
+            {
+                bgm.GetComponent<BGM>().doingGood = true;
+            }
             Peepers.Add(peep);
             peeps += 1;
             if (peeps > maxPeepsEver)
