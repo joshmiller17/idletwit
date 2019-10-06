@@ -347,10 +347,10 @@ RectTransform:
   m_Father: {fileID: 1786471483}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
-  m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -56.94998, y: 214.6}
-  m_SizeDelta: {x: -789.9, y: -464.1}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -79.057, y: 369.92}
+  m_SizeDelta: {x: 226.41, y: 73.904}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &83821047
 MonoBehaviour:
@@ -407,6 +407,151 @@ MonoBehaviour:
   peeps: 0
   eggplants: 0
   maxPeepsEver: 0
+--- !u!1 &421311556
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 421311557}
+  - component: {fileID: 421311560}
+  - component: {fileID: 421311559}
+  - component: {fileID: 421311558}
+  - component: {fileID: 421311561}
+  m_Layer: 5
+  m_Name: Mute
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &421311557
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 421311556}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1786471483}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -207, y: 346}
+  m_SizeDelta: {x: 29.475, y: 26.115}
+  m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &421311558
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 421311556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Navigation:
+    m_Mode: 3
+    m_SelectOnUp: {fileID: 0}
+    m_SelectOnDown: {fileID: 0}
+    m_SelectOnLeft: {fileID: 0}
+    m_SelectOnRight: {fileID: 0}
+  m_Transition: 1
+  m_Colors:
+    m_NormalColor: {r: 1, g: 1, b: 1, a: 1}
+    m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
+    m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_ColorMultiplier: 1
+    m_FadeDuration: 0.1
+  m_SpriteState:
+    m_HighlightedSprite: {fileID: 0}
+    m_PressedSprite: {fileID: 0}
+    m_SelectedSprite: {fileID: 0}
+    m_DisabledSprite: {fileID: 0}
+  m_AnimationTriggers:
+    m_NormalTrigger: Normal
+    m_HighlightedTrigger: Highlighted
+    m_PressedTrigger: Pressed
+    m_SelectedTrigger: Selected
+    m_DisabledTrigger: Disabled
+  m_Interactable: 1
+  m_TargetGraphic: {fileID: 421311559}
+  m_OnClick:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 421311561}
+        m_MethodName: Toggle
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &421311559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 421311556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_Sprite: {fileID: 21300000, guid: 7fb683ef7513974459717c0867371170, type: 3}
+  m_Type: 0
+  m_PreserveAspect: 0
+  m_FillCenter: 1
+  m_FillMethod: 4
+  m_FillAmount: 1
+  m_FillClockwise: 1
+  m_FillOrigin: 0
+  m_UseSpriteMesh: 0
+  m_PixelsPerUnitMultiplier: 1
+--- !u!222 &421311560
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 421311556}
+  m_CullTransparentMesh: 0
+--- !u!114 &421311561
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 421311556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6eb05fb1e9d257646a2aac0280ff3ca1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  music: 0
+  button: {fileID: 0}
+  musicImage: {fileID: 21300000, guid: 7fb683ef7513974459717c0867371170, type: 3}
+  noMusicImage: {fileID: 21300000, guid: f672fcceae448a1458cd0abb5c6a5f69, type: 3}
 --- !u!1 &501129539
 GameObject:
   m_ObjectHideFlags: 0
@@ -441,8 +586,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 78.624985, y: -44.425}
-  m_SizeDelta: {x: 284.25, y: 444.15}
+  m_AnchoredPosition: {x: 136.25, y: 110.89401}
+  m_SizeDelta: {x: 399.49, y: 444.1}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &501129541
 MonoBehaviour:
@@ -458,8 +603,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TwitPostPrefab: {fileID: 4003918092193815439, guid: ea683feabbc9f144b96ab8be0712ff45,
     type: 3}
+  GraffitiGrammarFile: {fileID: 4900000, guid: 14ac654fb60b3fe418302fef3c209c0f, type: 3}
   NB: {fileID: 83821045}
   SMBox: {fileID: 1347947490}
+  ScratchBox: {fileID: 1028391366}
+  Placeholder: {fileID: 662828311}
   UsernameGrammarFile: {fileID: 4900000, guid: 8d78e1d7a6a411e49aa5235a954502b6, type: 3}
   TwitGrammarFile: {fileID: 4900000, guid: a85e91fe6f4e4f44fb9f396604954d66, type: 3}
   isSM: 0
@@ -1039,8 +1187,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 127.4, y: 214.6}
-  m_SizeDelta: {x: 186.6, y: 73.9}
+  m_AnchoredPosition: {x: 172.6, y: 369.92}
+  m_SizeDelta: {x: 276.9, y: 73.897}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1028391368
 MonoBehaviour:
@@ -1066,7 +1214,7 @@ MonoBehaviour:
     m_HighlightedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
     m_PressedColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 1}
     m_SelectedColor: {r: 0.9607843, g: 0.9607843, b: 0.9607843, a: 1}
-    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0.5019608}
+    m_DisabledColor: {r: 0.78431374, g: 0.78431374, b: 0.78431374, a: 0}
     m_ColorMultiplier: 1
     m_FadeDuration: 0.1
   m_SpriteState:
@@ -1182,6 +1330,32 @@ MonoBehaviour:
   Placeholder: {fileID: 662828311}
   Nest: {fileID: 501129539}
   SMBox: {fileID: 1347947490}
+  tutorialTwits:
+  - Welcome to Twit Idol!
+  - You must be here because you have no friends.
+  - No one to care about you
+  - No one who loves you
+  - NOTHING
+  - That's okay.
+  - We love you!
+  - Even nobodies like you can gain the famous VALIDATION MARK eventually!
+  - Don't you want to become a CERTIFIED TWITPOSTER?
+  - I know you do.
+  - Everyone starts from nothing on Twit Idol.
+  - But eventually, you might
+  - maybe
+  - if you're lucky
+  - become someone!!
+  - like
+  - I mean someone worth caring about
+  - '...'
+  - Type some Twits to make friends!
+  - See a post you like? Make sure to SMASH that Eggplant button!
+  - Click Echo to claim a Twit as your own!
+  - Feel like a Twit isn't enough about you? Click that Graffiti button to fix that!
+  - Eventually, you'll start to earn some Peeps who care about you!
+  - Reach MAXIMUM PEEPAGE to become a true TWIT IDOL!
+  - Now get twitposting!!1!
 --- !u!1 &1347947490
 GameObject:
   m_ObjectHideFlags: 0
@@ -1216,8 +1390,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -152.25, y: -44.42501}
-  m_SizeDelta: {x: 177.5, y: 444.15}
+  m_AnchoredPosition: {x: -186.25, y: 100.520004}
+  m_SizeDelta: {x: 245.5, y: 423.5}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1347947492
 MonoBehaviour:
@@ -1233,8 +1407,11 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TwitPostPrefab: {fileID: 2522133031835103968, guid: 0f94c93ebdeb2ac4f92e627b64bc1cc4,
     type: 3}
+  GraffitiGrammarFile: {fileID: 4900000, guid: 14ac654fb60b3fe418302fef3c209c0f, type: 3}
   NB: {fileID: 83821045}
   SMBox: {fileID: 1347947490}
+  ScratchBox: {fileID: 1028391366}
+  Placeholder: {fileID: 662828311}
   UsernameGrammarFile: {fileID: 4900000, guid: 8d78e1d7a6a411e49aa5235a954502b6, type: 3}
   TwitGrammarFile: {fileID: 4900000, guid: a85e91fe6f4e4f44fb9f396604954d66, type: 3}
   isSM: 1
@@ -1456,8 +1633,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 54.48, y: 0.00012779}
-  m_SizeDelta: {x: 73.16, y: 68.9}
+  m_AnchoredPosition: {x: 66.1, y: -1.2499}
+  m_SizeDelta: {x: 96.5, y: 71.4}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1716340344
 MonoBehaviour:
@@ -1746,6 +1923,7 @@ RectTransform:
   - {fileID: 1347947491}
   - {fileID: 83821046}
   - {fileID: 1028391367}
+  - {fileID: 421311557}
   m_Father: {fileID: 0}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1865,7 +2043,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -198, y: 214.6}
+  m_AnchoredPosition: {x: -259, y: 374.32}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2073616294
@@ -1938,8 +2116,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0, y: -0.5000305}
-  m_SizeDelta: {x: 166.6, y: 60.9}
+  m_AnchoredPosition: {x: -0.000019073, y: -0.49991}
+  m_SizeDelta: {x: 256.9, y: 60.897}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &2105640678
 MonoBehaviour:

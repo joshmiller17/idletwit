@@ -3091,7 +3091,7 @@
   "event": [ "The #person# concert", "#person# live", "#person# at a book signing" ],
   "life": [ "Just got married!!!", "finally divorced", "Had a kid!", "Had two kids!", "Wife just had triplets!", "lost my job...", "laid off, looking for work" ],
   "ramble": [ "Did you ever stop to think about #noun#?", "Do you ever just consider #noun# and #noun#? #mood#" ],
-  "checkin": [ "Just checked out #place#, #mood#", "Just saw #event#, #mood#", "Just met #person#, #mood#" ],
+  "checkin": [     "Just watched #noun.capitalize# 3, #person# was in it :o ", "Just checked out #place#, #mood#", "Just saw #event#, #mood#", "Just met #person#, #mood#" ],
   "mood": [ "so happy to share!", "seriously mad right now", "srsly?", "amazing!", "incredible", "wow.", "omg", "OMG", "OMG!!", "OMG!!1!" ],
   "opinion": [ "love me some good #thing#", "I believe #statement#", "I think #statement#", "i feel like #statement#", "imho #statement#", "hot take: #statement#", "imo #statement#", "just a fact that #statement#", "#mood# #statement#" ],
   "meme": [ "#meme# \#lol", "#meme# \#funny", "One does not simply walk into #place#", "The memes, they go to eleven!", "Enough with the memes!", "Nobody expects #thing#!", "Nobody expects #person#!" ],
@@ -3106,9 +3106,8 @@
     "pepitas? like, pumpkin seeds?",
     "apple pie can be made without #noun#",
     "#noun#. that is all.",
-    "Just watched #noun.capitalize# 3, #person# was in it :o",
     "#noun# and #noun# are the same thing",
-    "Happy unbirthday to me!",
+    "Happy unbirthday to me!"
   ],
   "year": [ "201#number#", "200#number#", "19#number##number#" ],
   "fact": [
@@ -3119,7 +3118,7 @@
     "#statement#\#fact",
     "#statement#\#facts",
     "#statement#\#truefacts",
-    "#statement#(#person#, #year#)"
+    "#statement# (#person#, #year#)"
   ],
   "announcement": [ "#promo#", "Going to #event#!", "#event# #mood#", "#life#", "I can't wait! #announcement#", "Did y'all see this? #announcement#" ],
   "twit": [ "#ramble#", "#opinion#", "#fact#", "#meme#" ],

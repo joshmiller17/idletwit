@@ -1,11 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityTracery;
 using UnityEngine.UI;
 
 public class TwitPost : MonoBehaviour
 {
-
+    public TextAsset GraffitiGrammarFile;
+    public TraceryGrammar GraffitiGrammar;
+    public GameObject Spray;
     private bool isEchoed = false;
     private bool isGraffitied = false;
     private bool isEggplanted = false;
@@ -23,6 +26,8 @@ public class TwitPost : MonoBehaviour
     public GameObject EggplantStat;
     public AudioSource pop;
     public AudioClip[] popClips;
+    public AudioSource grafSource;
+    public AudioClip[] grafClips;
     public float popularity; // success measure between 0 and 1, typically; = success / 1m ... set on Post
     public string author = "";
     private int smash = 0;
@@ -46,6 +51,7 @@ public class TwitPost : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        GraffitiGrammar = new TraceryGrammar(GraffitiGrammarFile.text);
     }
 
     // Update is called once per frame
@@ -66,8 +72,8 @@ public class TwitPost : MonoBehaviour
             //PlayQuietPop();
             int NewGraffitis = Mathf.RoundToInt(Mathf.Max(0,popularity) * Random.Range(0, NB.peeps));
             int NewEchoes = Mathf.RoundToInt(Mathf.Max(0, popularity) * Random.Range(0, NB.peeps));
-            int NewEggplants = Mathf.RoundToInt(Mathf.Max(0, popularity) * Random.Range(0, NB.peeps * 10));
-            if (Random.Range(0, 10) > 8)
+            int NewEggplants = Mathf.RoundToInt(Mathf.Max(0, popularity) * Random.Range(0, NB.peeps));
+            if (Random.Range(0, 100) < 1)
             {
                 NewEggplants += 1;
             }
@@ -76,8 +82,8 @@ public class TwitPost : MonoBehaviour
             Eggplants += NewEggplants;
             if (author == "You")
             {
-                popularity += NB.peeps / 1000000f;
-                NB.AddEggplants(Mathf.RoundToInt((NewEggplants * NB.peeps) / 1000000f));
+                popularity += NB.peeps / 100000f;
+                NB.AddEggplants(NewEggplants);
                 if (Random.Range(0f, 1f) < Mathf.Min(0.5f, popularity * 100 + 0.00002f + NB.peeps * .00000001f))
                 {
                     if (NB.eggplants > 100 * NB.peeps)
@@ -140,6 +146,13 @@ public class TwitPost : MonoBehaviour
         pop.PlayOneShot(pop.clip);
     }
 
+    void PlayGraffiti()
+    {
+        grafSource.clip = grafClips[Random.Range(0, grafClips.Length)];
+        grafSource.volume = 1f;
+        grafSource.PlayOneShot(grafSource.clip);
+    }
+
     string StatToString(int stat)
     {
         if (stat < 999)
@@ -177,7 +190,7 @@ public class TwitPost : MonoBehaviour
             isEchoed = true;
             PlayPop();
 
-            if (author == "You")
+            if (author == "You" && !Nest.GetComponent<Nest>().isTutorialGoing())
             {
                 Nest.GetComponent<Nest>().LosePeeps();
                 SMBox.GetComponent<Nest>().PostTwit(Nest.GetComponent<Nest>().GenerateUsername(), "Echoing your own twit? Laaame!");
@@ -204,9 +217,10 @@ public class TwitPost : MonoBehaviour
             Graffitis += 1;
             GraffitiStat.GetComponent<Text>().text = StatToString(Graffitis);
             isGraffitied = true;
-            PlayPop();
+            PlayGraffiti();
+            Spray.GetComponent<Text>().text = GraffitiGrammar.Generate();
 
-            if (author == "You")
+            if (author == "You" && !Nest.GetComponent<Nest>().isTutorialGoing())
             {
                 Nest.GetComponent<Nest>().LosePeeps();
                 SMBox.GetComponent<Nest>().PostTwit(Nest.GetComponent<Nest>().GenerateUsername(), "Graffiti on your own twit? You must be so lonely!");

@@ -16,11 +16,11 @@ public class ScratchBox : MonoBehaviour
 
     private string nextTwit = "";
 
-    private List<float> tutorialTimers = new List<float> {  5, 4,   1, 2, 3,   2, 3, 6,
-                                                            2,5,3,   .8f,.7f,.9f,  8,3,10,    8, 3, 4,
+    private List<float> tutorialTimers = new List<float> {  5, 2.5f,   1, 2, 3,   2, 3, 6,
+                                                            2,5,3,   .8f,.7f,.9f,  8,3,7,    7, 3, 4,
                                                             3.6f, 4.2f, 5,  3 };
     private float timeToNextTutorial = 4;
-    private List<string> tutorialTwits = new List<string>
+    public List<string> tutorialTwits = new List<string>
     {
         "Welcome to Twit Idol!", //no timer
 
@@ -104,10 +104,7 @@ public class ScratchBox : MonoBehaviour
 
     }
 
-    bool isTutorialGoing()
-    {
-        return tutorialTwits.Count > 0;
-    }
+
 
     void SendTwit()
     {

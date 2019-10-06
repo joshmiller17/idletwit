@@ -7,8 +7,11 @@ using UnityTracery;
 public class Nest : MonoBehaviour
 {
     public GameObject TwitPostPrefab;
+    public TextAsset GraffitiGrammarFile;
     public GameObject NB;
     public GameObject SMBox;
+    public GameObject ScratchBox;
+    public GameObject Placeholder;
     public TextAsset UsernameGrammarFile;
     public TextAsset TwitGrammarFile;
     public TraceryGrammar UsernameGrammar;
@@ -20,13 +23,18 @@ public class Nest : MonoBehaviour
     public AudioClip[] clackClips;
     public float twitIntensity = 5f; //less is more
     public float timeSinceLastTwit = 0f;
-    private float initialDelay = 0f; //75f; TODO put back after testing
+    private float initialDelay = 66.5f;
 
     // Start is called before the first frame update
     void Start()
     {
         UsernameGrammar = new TraceryGrammar(UsernameGrammarFile.text);
         TwitGrammar = new TraceryGrammar(TwitGrammarFile.text);
+        ScratchBox.GetComponent<InputField>().interactable = false;
+        if (!isSM)
+        {
+            Placeholder.SetActive(false);
+        }
     }
 
     // Update is called once per frame
@@ -35,13 +43,18 @@ public class Nest : MonoBehaviour
         if (initialDelay > 0)
         {
             initialDelay -= Time.deltaTime;
+            if (initialDelay <= 0 && !isSM)
+            {
+                ScratchBox.GetComponent<InputField>().interactable = true;
+                Placeholder.SetActive(true);
+            }
             return;
         }
         timeSinceLastTwit += Time.deltaTime;
         if (timeSinceLastTwit > Random.Range(0f, Mathf.Max(1, 10000000 - NB.GetComponent<NumbersBoard>().peeps)))
         {
             LosePeeps();
-            if (isSM && NB.GetComponent<NumbersBoard>().peeps > 3)
+            if (isSM && NB.GetComponent<NumbersBoard>().peeps > 3 && !isTutorialGoing())
             {
                 PostTwit(GenerateUsername(), TwitGrammar.Parse("#notwit#"));
             }
@@ -77,6 +90,11 @@ public class Nest : MonoBehaviour
         {
             LosePeeps();
         }
+    }
+
+    public bool isTutorialGoing()
+    {
+        return ScratchBox.GetComponent<ScratchBox>().tutorialTwits.Count > 0;
     }
 
     void PlayClack()
@@ -142,6 +160,7 @@ public class Nest : MonoBehaviour
     {
         GameObject NewPost = Instantiate(TwitPostPrefab, transform.position + new Vector3(0, 170, 0), Quaternion.identity);
         NewPost.GetComponent<TwitPost>().Nest = this.gameObject;
+        NewPost.GetComponent<TwitPost>().GraffitiGrammarFile = GraffitiGrammarFile;
         NewPost.GetComponent<TwitPost>().SMBox = SMBox;
         NewPost.GetComponent<TwitPost>().NB = NB.GetComponent<NumbersBoard>();
         NewPost.GetComponent<TwitPost>().popularity = popularity;
