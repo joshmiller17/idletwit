@@ -9,7 +9,9 @@ public class BGM : MonoBehaviour
     public TextAsset SongGrammarFile;
     public AudioSource bgm;
     public AudioClip[] bgmClips; //C, c1, c7, A7, G, G2, F, F2
-    private float timeTilChordChange;
+    public AudioClip[] goodClips;
+    public AudioClip[] badClips;
+    private float timeTilChordChange = 30;
     private Map<int, string> chords = new Map<int, string>();
     private string currentChord = "c";
     public bool doingGood = true;
@@ -18,7 +20,6 @@ public class BGM : MonoBehaviour
     void Start()
     {
         bgm = GetComponent<AudioSource>();
-        timeTilChordChange = 5.30f;
         SongGrammar = new TraceryGrammar(SongGrammarFile.text);
         chords.Add(0, "c");
         chords.Add(1, "c1");
@@ -37,23 +38,33 @@ public class BGM : MonoBehaviour
         if (timeTilChordChange < 0)
         {
             SetChord();
-            timeTilChordChange = 5.30f;
+            timeTilChordChange = 30 + Random.Range(0, 30);
         }
     }
 
     void SetChord()
     {
-        string newChord = SongGrammar.Parse("#" + currentChord + "#");
-        if (!doingGood && currentChord == "c")
+        //int whichClip = 0;
+        //string newChord = SongGrammar.Parse("#" + currentChord + "#");
+        //if (!doingGood && currentChord == "c")
+        //{
+        //    currentChord = "c1";
+        //}
+        //else
+        //{
+        //    currentChord = newChord;
+        //}
+        //whichClip = chords.Reverse[currentChord];
+        //bgm.clip = bgmClips[whichClip];
+
+        if (doingGood)
         {
-            currentChord = "c1";
+            bgm.clip = goodClips[Random.Range(0, goodClips.Length)];
         }
         else
         {
-            currentChord = newChord;
+            bgm.clip = badClips[Random.Range(0, badClips.Length)];
         }
-        int whichClip = chords.Reverse[currentChord];
-        bgm.clip = bgmClips[whichClip];
         bgm.PlayOneShot(bgm.clip);
     }
 }

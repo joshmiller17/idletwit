@@ -23,7 +23,7 @@ public class Nest : MonoBehaviour
     public AudioClip[] clackClips;
     public float twitIntensity = 5f; //less is more
     public float timeSinceLastTwit = 0f;
-    private float initialDelay = 66.5f;
+    private float initialDelay = 60f;
 
     // Start is called before the first frame update
     void Start()
@@ -51,12 +51,19 @@ public class Nest : MonoBehaviour
             return;
         }
         timeSinceLastTwit += Time.deltaTime;
-        if (timeSinceLastTwit > Random.Range(0f, Mathf.Max(1, 10000000 - NB.GetComponent<NumbersBoard>().peeps)))
+        if (!isSM && timeSinceLastTwit > Random.Range(0f, Mathf.Max(1, 1000000 - 3 * NB.GetComponent<NumbersBoard>().peeps)))
         {
             LosePeeps();
-            if (isSM && NB.GetComponent<NumbersBoard>().peeps > 3 && !isTutorialGoing())
+            if (isSM && NB.GetComponent<NumbersBoard>().peeps > 3 && !isTutorialGoing() && Random.Range(0f, 1f) < 0.3f)
             {
                 PostTwit(GenerateUsername(), TwitGrammar.Parse("#notwit#"));
+                LosePeeps();
+            }
+            else
+            {
+                string twit = "Sheesh, you haven't posted in " + timeSinceLastTwit.ToString("F1") + " seconds, what's the deal?";
+                PostTwit(GenerateUsername(), twit);
+                LosePeeps();
             }
         }
 
@@ -82,11 +89,11 @@ public class Nest : MonoBehaviour
 
     public void LosePeeps()
     {
-        for (int i = 0; i < Random.Range(0, NB.GetComponent<NumbersBoard>().peeps / 8); i++)
+        for (int i = 0; i < Random.Range(0, NB.GetComponent<NumbersBoard>().peeps / 5); i++)
         {
             NB.GetComponent<NumbersBoard>().RemovePeep();
         }
-        if (0.5 > Random.Range(0f, Mathf.Max(1, 10000000 - NB.GetComponent<NumbersBoard>().peeps)))
+        if (0.5 > Random.Range(0f, Mathf.Max(1, 10000 - NB.GetComponent<NumbersBoard>().peeps)))
         {
             LosePeeps();
         }

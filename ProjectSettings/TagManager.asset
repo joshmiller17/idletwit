@@ -13,7 +13,7 @@ TagManager:
   - UI
   - 
   - 
-  - 
+  - cloud
   - 
   - 
   - 
@@ -40,4 +40,7 @@ TagManager:
   m_SortingLayers:
   - name: Default
     uniqueID: 0
+    locked: 0
+  - name: cloud
+    uniqueID: 3121454967
     locked: 0

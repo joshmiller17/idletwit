@@ -9,6 +9,8 @@ public class NumbersBoard : MonoBehaviour
     public GameObject PeepCount;
     public GameObject EggplantCount;
     public GameObject DeleteButton;
+    public GameObject Cloud;
+    public GameObject PeepCloud;
     public GameObject bgm;
     public int peeps;
     public long eggplants;
@@ -24,9 +26,16 @@ public class NumbersBoard : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (maxPeepsEver > 100 && peeps < maxPeepsEver / 2)
+        if (maxPeepsEver > 10 && peeps < 0.8 * maxPeepsEver)
         {
             DeleteButton.SetActive(true);
+        }
+
+        // Cloud spawner
+        if (Random.Range(0f, 100f) < 0.03)
+        {
+            GameObject spawn = Instantiate(Cloud, new Vector3(-1000, Random.Range(-1000, 1000), 0), Quaternion.identity);
+            spawn.transform.SetParent(gameObject.transform.parent);
         }
     }
 
@@ -45,7 +54,12 @@ public class NumbersBoard : MonoBehaviour
 
     public bool AddPeep(string peep)
     {
-        bgm.GetComponent<BGM>().doingGood = true;
+        GameObject spawn = Instantiate(PeepCloud, new Vector3(-1000, Random.Range(-1000, 1000), 0), Quaternion.identity);
+        spawn.transform.SetParent(gameObject.transform.parent);
+        if (Random.Range(0f, 1f) > 0.9f)
+        {
+            bgm.GetComponent<BGM>().doingGood = true;
+        }
         if (Peepers.Contains(peep) || eggplants < 100 * peeps)
         {
             return false;

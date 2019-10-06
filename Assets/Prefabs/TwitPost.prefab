@@ -318,8 +318,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -35.2, y: -1.58}
-  m_SizeDelta: {x: -78.99, y: 0}
+  m_AnchoredPosition: {x: -27.72, y: 7.22}
+  m_SizeDelta: {x: -55.43, y: 29.06}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &7551146713632903114
 CanvasRenderer:
@@ -416,6 +416,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   GraffitiGrammarFile: {fileID: 4900000, guid: 14ac654fb60b3fe418302fef3c209c0f, type: 3}
+  EggplantParticle: {fileID: 2302729356262512121, guid: a6300a2c6f588064d98daaea63481f27,
+    type: 3}
+  PeepParticle: {fileID: 2186694623183661303, guid: fe966fc8b9bd61247b8ccaafb922828a,
+    type: 3}
   Spray: {fileID: 2621929024414160020}
   Nest: {fileID: 0}
   SMBox: {fileID: 0}
@@ -975,8 +979,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -28.4, y: 0.70751}
-  m_SizeDelta: {x: -66.55, y: -1.415}
+  m_AnchoredPosition: {x: -25.5, y: 7.4}
+  m_SizeDelta: {x: -55.06, y: 22.38}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &3808252172029182944
 CanvasRenderer:
@@ -1328,8 +1332,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
-  m_AnchoredPosition: {x: -35.12, y: 0.20750046}
-  m_SizeDelta: {x: -70.25, y: 0.41499}
+  m_AnchoredPosition: {x: -36.6, y: 2.7}
+  m_SizeDelta: {x: -49.17, y: 21.49}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!222 &5746913914480805651
 CanvasRenderer:

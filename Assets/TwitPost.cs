@@ -8,6 +8,8 @@ public class TwitPost : MonoBehaviour
 {
     public TextAsset GraffitiGrammarFile;
     public TraceryGrammar GraffitiGrammar;
+    public GameObject EggplantParticle;
+    public GameObject PeepParticle;
     public GameObject Spray;
     private bool isEchoed = false;
     private bool isGraffitied = false;
@@ -57,6 +59,11 @@ public class TwitPost : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //slow things down
+        if (Random.Range(0f,1f) > 0.001)
+        {
+            return;
+        }
         if (transform.position.y < -1000) //don't delete until a while off screen
         {
             Destroy(gameObject);
@@ -83,12 +90,22 @@ public class TwitPost : MonoBehaviour
             if (author == "You")
             {
                 popularity += NB.peeps / 100000f;
+                if (NewEggplants > 10)
+                {
+                    NewEggplants = Mathf.RoundToInt(NewEggplants / NB.peeps);
+                }
                 NB.AddEggplants(NewEggplants);
+                if (NewEggplants > 0)
+                {
+                    SpawnEggplant();
+                }
                 if (Random.Range(0f, 1f) < Mathf.Min(0.5f, popularity * 100 + 0.00002f + NB.peeps * .00000001f))
                 {
-                    if (NB.eggplants > 100 * NB.peeps)
+                    if (NB.eggplants > 100 * NB.peeps && !Nest.GetComponent<Nest>().isTutorialGoing())
                     {
+                        SpawnPeep();
                         NB.AddPeep(Nest.GetComponent<Nest>().GenerateUsername());
+                        SpawnPeep();
                     }
                     else
                     {
@@ -97,18 +114,22 @@ public class TwitPost : MonoBehaviour
                 }
             }
             UpdateStats();
-            SpawnEggplant();
         }
     }
 
     private void SpawnEggplant()
     {
-        //TODO
+       GameObject spawn = Instantiate(EggplantParticle, transform.position, Quaternion.identity);
+       spawn.transform.SetParent(gameObject.transform);
     }
 
     private void SpawnPeep()
     {
-        //TODO
+        for (int i = 0; i < Random.Range(0, NB.peeps % 20); i++)
+        {
+            GameObject spawn = Instantiate(PeepParticle, transform.position, Quaternion.identity);
+            spawn.transform.SetParent(gameObject.transform);
+        }
     }
 
     public void UpdateStats()
@@ -195,11 +216,12 @@ public class TwitPost : MonoBehaviour
                 Nest.GetComponent<Nest>().LosePeeps();
                 SMBox.GetComponent<Nest>().PostTwit(Nest.GetComponent<Nest>().GenerateUsername(), "Echoing your own twit? Laaame!");
             }
-            else if (Random.Range(0f, 1f) < Mathf.Min(0.5f, +0.0002f + popularity * 10 * NB.peeps * .0000001f))
+            else if (Random.Range(0f, 1f) < Mathf.Min(0.5f, +0.0002f + popularity * 10 * NB.peeps * .0000001f) && !Nest.GetComponent<Nest>().isTutorialGoing())
             {
                 if (NB.eggplants > 100 * NB.peeps)
                 {
                     NB.AddPeep(author);
+                    SpawnPeep();
                 }
             }
         }
@@ -223,23 +245,42 @@ public class TwitPost : MonoBehaviour
             if (author == "You" && !Nest.GetComponent<Nest>().isTutorialGoing())
             {
                 Nest.GetComponent<Nest>().LosePeeps();
-                SMBox.GetComponent<Nest>().PostTwit(Nest.GetComponent<Nest>().GenerateUsername(), "Graffiti on your own twit? You must be so lonely!");
+                int response = Random.Range(0, 4);
+                if (response == 0)
+                {
+                    SMBox.GetComponent<Nest>().PostTwit(Nest.GetComponent<Nest>().GenerateUsername(), "Graffiti on your own twit? You must be so lonely!");
+                }
+                else if (response == 1)
+                {
+                    SMBox.GetComponent<Nest>().PostTwit(Nest.GetComponent<Nest>().GenerateUsername(), "Hold up on the Graffiti dude.");
+                }
+                else if (response == 2)
+                {
+                    SMBox.GetComponent<Nest>().PostTwit(Nest.GetComponent<Nest>().GenerateUsername(), "Okay, chill. Your own posts aren't that cool.");
+                }
+                else
+                {
+                    SMBox.GetComponent<Nest>().PostTwit(Nest.GetComponent<Nest>().GenerateUsername(), "We get it, you care about your own posts.");
+                }
             }
             else if (Graffitis == 1)
             {
-                if (Random.Range(0f, 1f) < 0.3f) {
+                if (Random.Range(0f, 1f) < 0.3f && !Nest.GetComponent<Nest>().isTutorialGoing()) {
                     NB.AddPeep(author);
+                    SpawnPeep();
                 }
-                else if(Random.Range(0f, 1f) < 0.7f)
+                else if(Random.Range(0f, 1f) < 0.7f && !Nest.GetComponent<Nest>().isTutorialGoing())
                 {
                     NB.AddPeep(Nest.GetComponent<Nest>().GenerateUsername());
+                    SpawnPeep();
                 }
             }
             else if (Random.Range(0f, 1f) < Mathf.Min(0.5f, + 0.0002f + popularity * 10 * NB.peeps * .0000001f))
             {
-                if (NB.eggplants > 100 * NB.peeps)
+                if (NB.eggplants > 100 * NB.peeps && !Nest.GetComponent<Nest>().isTutorialGoing())
                 {
                     NB.AddPeep(author);
+                    SpawnPeep();
                 }
             }
         }
@@ -261,9 +302,10 @@ public class TwitPost : MonoBehaviour
 
             if (Random.Range(0f, 1f) < Mathf.Min(0.5f, + 0.000002f + popularity * NB.peeps * .000000001f))
             {
-                if (NB.eggplants > 100 * NB.peeps)
+                if (NB.eggplants > 100 * NB.peeps && !Nest.GetComponent<Nest>().isTutorialGoing())
                 {
                     NB.AddPeep(author);
+                    SpawnPeep();
                 }
             }
         }

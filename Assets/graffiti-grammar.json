@@ -1,5 +1,5 @@
 {
   "c": [ "+","=", "\#", "?", "_", "!", "$"],
   "feeling": [ "LI#c#KE", "H#c#ATE", "L#c#OVE", "D#c#ISL#c#IKE" ],
-  "origin": [ "#c#ME T#c#OO", "S#c#AME", "I #feeling# THI#c#IS", "#c#I #feeling# THIS", "I#c# #feeling# #c#THIS", "I DO#c#N'T THIN#c#K SO", "I WA#c#S TH#c#ERE", "SO#c# LAST#c# YEAR", "EC#c#HOED", "EG#c#GPLA#c#NTED"]
+  "origin": [ "#c#ME T#c#OO", "S#c#AME", "I #feeling# THI#c#IS", "#c#I #feeling# THIS", "I#c# #feeling# #c#THIS#c#", "I DO#c#N'T THIN#c#K SO", "I WA#c#S TH#c#ERE", "SO#c# LAST#c# YEAR", "EC#c#HOED#c#", "EG#c#GPLA#c#NTED"]
 }
