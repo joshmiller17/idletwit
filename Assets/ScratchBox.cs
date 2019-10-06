@@ -16,9 +16,9 @@ public class ScratchBox : MonoBehaviour
 
     private string nextTwit = "";
 
-    private List<float> tutorialTimers = new List<float> {  3, 2.5f,   1, 2, 3,   2, 3, 4,
-                                                            2,4,3,   .8f,.7f,.9f,  6,2.5f,5,    3f, 2, 2.3f,
-                                                            3.1f, 2.2f, 2.8f,  2, 2, 1.5f };
+    private List<float> tutorialTimers = new List<float> {  2, 2.5f,   1, 2, 3,   2, 3, 3,
+                                                            2,2.5f,3,   .8f,.7f,.9f,  6,2.5f,5,    3f, 2, 2.3f,
+                                                            3.1f, 2.2f,2, 2.8f, 2,2, 2, 2, 1.5f };
     private float timeToNextTutorial = 1; //timer for first tutorial post
     public List<string> tutorialTwits = new List<string>
     {
@@ -49,12 +49,12 @@ public class ScratchBox : MonoBehaviour
 
 
         "Type some Twits to make friends!",
+        "Follow the Peeps, interact with famous Twits!",
         "See a post you like? Make sure to SMASH that Eggplant button!",
         "Click Echo to claim a Twit as your own!",
 
         "Feel like a Twit isn't enough about you? Click that Graffiti button to fix that!",
         "Eventually, you'll start to earn some Peeps who care about you!",
-        "Follow the Peeps, interact with famous Twits!",
         
         "Popular Twits are popular for a reason ;)",
         "Reach MAXIMUM PEEPAGE to become a true TWIT IDOL!",

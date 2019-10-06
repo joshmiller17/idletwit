@@ -25,6 +25,17 @@ public class Nest : MonoBehaviour
     public float timeSinceLastTwit = 0f;
     private float initialDelay = 54f;
     private bool tested = false;
+    private string[] tutorialTips = {
+    "Type some Twits to make friends!",
+        "See a post you like? Make sure to SMASH that Eggplant button!",
+        "Click Echo to claim a Twit as your own!",
+
+        "Feel like a Twit isn't enough about you? Click that Graffiti button to fix that!",
+        "Eventually, you'll start to earn some Peeps who care about you!",
+        "Follow the Peeps, interact with famous Twits!",
+
+        "Popular Twits are popular for a reason ;)"
+        };
 
     // Start is called before the first frame update
     void Start()
@@ -41,6 +52,11 @@ public class Nest : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (initialDelay <= 0 && Random.Range(0,1000000) < 1)
+        {
+            PostTwit("Teh Twit Birb (TM)", tutorialTips[Random.Range(0, tutorialTips.Length)]);
+        }
+
         if (initialDelay > 0)
         {
             initialDelay -= Time.deltaTime;

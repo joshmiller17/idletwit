@@ -54,11 +54,8 @@ public class NumbersBoard : MonoBehaviour
 
     public bool AddPeep(string peep)
     {
-        for (int i = 0; i < 3; i++)
-        {
-            GameObject spawn = Instantiate(PeepCloud, new Vector3(-1000, Random.Range(-500, 1000), 0), Quaternion.identity);
-            spawn.transform.SetParent(gameObject.transform.parent);
-        }
+        GameObject spawn = Instantiate(PeepCloud, new Vector3(-1000, Random.Range(-500, 1000), 0), Quaternion.identity);
+        spawn.transform.SetParent(gameObject.transform.parent);
         if (Peepers.Contains(peep) || eggplants < 100 * peeps)
         {
             return false;
